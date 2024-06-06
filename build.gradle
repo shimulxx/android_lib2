@@ -3,4 +3,37 @@ plugins {
 alias(libs.plugins.android.application) apply false
     alias(libs.plugins.jetbrains.kotlin.android) apply false
     alias(libs.plugins.android.library) apply false
+    id 'maven-publish'
+}
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'bd.sicunetbd.work'
+            artifactId = 'work'
+            version = '1.0.0'
+
+            // Include the AAR file
+            artifact("$buildDir/outputs/aar/${project.name}-release.aar")
+
+            // Optional: Add sources jar if available
+            artifact source: tasks.sourcesJar, classifier: 'sources'
+
+            // Optional: Add javadoc jar if available
+            artifact source: tasks.javadocJar, classifier: 'javadoc'
+        }
+    }
+
+    repositories {
+        maven {
+            // Change to point to your repository
+            url = uri('https://your.repository.url/path/to/repository')
+
+            credentials {
+                // Optional: Uncomment and fill in if authentication is required
+                // username = project.findProperty("repo.user") ?: ""
+                // password = project.findProperty("repo.password") ?: ""
+            }
+        }
+    }
 }
