@@ -9,27 +9,29 @@ alias(libs.plugins.android.application) apply false
 publishing {
     publications {
         release(MavenPublication) {
-            groupId = 'bd.sicunetbd.work'
-            artifactId = 'work'
+            groupId = 'bd.sbd.sdk'
+            artifactId = 'default'
             version = '1.0.0'
 
             // Include the AAR file
-            artifact("$buildDir/outputs/aar/${project.name}-release.aar")
+            artifact("$projectDir/leafble/leafble.aar")
 
             // Optional: Add sources jar if available
-            artifact source: tasks.sourcesJar, classifier: 'sources'
+            //artifact source: tasks.sourcesJar, classifier: 'sources'
 
             // Optional: Add javadoc jar if available
-            artifact source: tasks.javadocJar, classifier: 'javadoc'
+            //artifact source: tasks.javadocJar, classifier: 'javadoc'
         }
     }
 
     repositories {
         maven {
             // Change to point to your repository
-            url = uri('https://your.repository.url/path/to/repository')
+            url = uri('https://github.com/shimulxx/android_lib2.git')
 
             credentials {
+                username = "shimulxx"
+                password = "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"
                 // Optional: Uncomment and fill in if authentication is required
                 // username = project.findProperty("repo.user") ?: ""
                 // password = project.findProperty("repo.password") ?: ""
